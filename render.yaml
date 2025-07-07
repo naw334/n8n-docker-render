@@ -4,7 +4,9 @@ services:
     runtime: docker
     region: ohio
     plan: free
+    repo: https://github.com/naw334/n8n-docker-render
     branch: main
+    rootDir: .
     dockerfilePath: ./Dockerfile
     envVars:
       - key: N8N_BASIC_AUTH_USER
@@ -13,7 +15,9 @@ services:
         sync: false
       - key: N8N_HOST
         value: 0.0.0.0
+      - key: WEBHOOK_TUNNEL_URL
+        value: https://n8n.onrender.com
       - key: N8N_PORT
         value: 5678
-      - key: N8N_ENFORCE_SETTINGS_FILE_PERMISSIONS
-        value: 'true'
+      - key: N8N_ENCRYPTION_KEY
+        generateValue: true
