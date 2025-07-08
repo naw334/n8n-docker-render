@@ -1,23 +1,33 @@
 services:
   - type: web
     name: n8n
-    runtime: docker
-    region: ohio
+    env: docker
     plan: free
-    repo: https://github.com/naw334/n8n-docker-render
+    region: frankfurt
     branch: main
-    rootDir: .
     dockerfilePath: ./Dockerfile
+    autoDeploy: true
+
     envVars:
+      - key: N8N_BASIC_AUTH_ACTIVE
+        value: 'true'
       - key: N8N_BASIC_AUTH_USER
-        sync: false
+        value: 'admin'
       - key: N8N_BASIC_AUTH_PASSWORD
-        sync: false
+        value: 'your_password_here'
       - key: N8N_HOST
-        value: 0.0.0.0
+        value: n8n.onrender.com
+      - key: N8N_PORT
+        value: '5678'
       - key: WEBHOOK_TUNNEL_URL
         value: https://n8n.onrender.com
-      - key: N8N_PORT
-        value: 5678
-      - key: N8N_ENCRYPTION_KEY
-        generateValue: true
+      - key: GENERIC_TIMEZONE
+        value: Europe/Berlin
+      - key: N8N_EDITOR_BASE_URL
+        value: https://n8n.onrender.com
+      - key: N8N_ENABLE_BETA_FEATURES
+        value: 'true'
+
+    volumes:
+      - name: data
+        path: /data
