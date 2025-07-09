@@ -2,32 +2,34 @@ services:
   - type: web
     name: n8n
     env: docker
+    repo: https://github.com/n8n-io/n8n
+    branch: master
     plan: free
-    region: frankfurt
-    branch: main
-    dockerfilePath: ./Dockerfile
-    autoDeploy: true
-
+    dockerfilePath: Dockerfile
     envVars:
-      - key: N8N_BASIC_AUTH_ACTIVE
-        value: 'true'
-      - key: N8N_BASIC_AUTH_USER
-        value: 'admin'
-      - key: N8N_BASIC_AUTH_PASSWORD
-        value: 'your_password_here'
+      - key: DB_TYPE
+        value: postgresdb
+      - key: DB_POSTGRESDB_HOST
+        value: dpg-d1n3si7diees73en26g0-a
+      - key: DB_POSTGRESDB_PORT
+        value: "5432"
+      - key: DB_POSTGRESDB_DATABASE
+        value: n8n_db_u473
+      - key: DB_POSTGRESDB_USER
+        value: n8n_db_u473_user
+      - key: DB_POSTGRESDB_PASSWORD
+        value: <RgqGxYAPPa23Dtz7m0KryscxoTkjAWv0>
       - key: N8N_HOST
         value: n8n.onrender.com
       - key: N8N_PORT
-        value: '5678'
-      - key: WEBHOOK_TUNNEL_URL
-        value: https://n8n.onrender.com
+        value: "5678"
+      - key: WEBHOOK_URL
+        value: https://n8n.onrender.com/
+      - key: N8N_BASIC_AUTH_ACTIVE
+        value: "true"
+      - key: N8N_BASIC_AUTH_USER
+        value: admin
+      - key: N8N_BASIC_AUTH_PASSWORD
+        value: secure12345
       - key: GENERIC_TIMEZONE
-        value: Europe/Berlin
-      - key: N8N_EDITOR_BASE_URL
-        value: https://n8n.onrender.com
-      - key: N8N_ENABLE_BETA_FEATURES
-        value: 'true'
-
-    volumes:
-      - name: data
-        path: /data
+        value: Europe/Paris
